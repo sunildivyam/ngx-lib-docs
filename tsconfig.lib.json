@@ -1,0 +1,28 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../out-tsc/lib",
+    "declaration": true,
+    "declarationMap": true,
+    "inlineSources": true,
+    "types": [],
+    "paths": {
+      "@annuadvent/ngx-common-ui": [
+        "dist/ngx-common-ui"
+      ],
+      "@annuadvent/ngx-common-ui/*": [
+        "dist/ngx-common-ui/*"
+      ],
+      "@annuadvent/ngx-core": [
+        "dist/ngx-core"
+      ],
+      "@annuadvent/ngx-core/*": [
+        "dist/ngx-core/*"
+      ],
+    }
+  },
+  "exclude": [
+    "**/*.spec.ts"
+  ]
+}
