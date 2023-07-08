@@ -33,7 +33,14 @@ export interface LibAssetsInfo {
 export interface LibInfo {
     name: string;
     fullName: string;
+    version: string;
     description: string;
+    homepage: string;
+    bugs: string;
+    git: string;
+    dependencies: Array<string>;
+    node: string;
+    npm: string;
     libAssetsInfo?: LibAssetsInfo;
     componentTypes?: ComponentTypes;
     serviceTypes?: ServiceTypes;

@@ -46,7 +46,7 @@ export class ServiceInfoComponent implements OnInit {
   private initServiceInstance() {
     this.filteredMethods = this.serviceInfo?.methods || [];
     // Set Service Instance
-    if (this.serviceInfo) {
+    if (this.serviceInfo && this.serviceType) {
       this.serviceInstance = this.injector.get<any>(this.serviceType);
     } else {
       this.serviceInstance = null;

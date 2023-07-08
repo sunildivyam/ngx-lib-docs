@@ -19,8 +19,3 @@ export * from "./src/interfaces/interceptor-info.interface";
 export * from "./src/interfaces/interface-info.interface";
 export * from "./src/interfaces/service-info.interface";
 export * from "./src/interfaces/component-props.interface";
-
-// Resolvers
-export * from './src/resolvers/asset-info.resolver';
-export * from './src/resolvers/asset-type-info.resolver';
-export * from './src/resolvers/lib-info.resolver';

@@ -33,13 +33,58 @@ export class DocsInfoService {
     return this.libsInfo$.value;
   }
 
+  public set libsInfoValue(value: LibsInfo) {
+    this.libsInfo$.next(value);
+  }
+
   public addLibInfo(libInfo: LibInfo): void {
     this.libsInfo$.next({ ...this.libsInfo$.value, [libInfo.name]: libInfo });
   }
 
-  public async getLibAssetsInfo(url: string): Promise<LibAssetsInfo> {
+  public async getLibAssetsInfo(libName: string, url: string): Promise<LibAssetsInfo> {
     if (!url) throw new Error(`Invalid lib's documentation.json url`);
 
+    return new Promise((resolve, reject) => {
+      if (this.libsInfoValue[libName]?.libAssetsInfo) {
+        resolve(this.libsInfoValue[libName]?.libAssetsInfo);
+      } else {
+        this.httpClient.get<any>(url, { responseType: 'json' })
+          .pipe(catchError(
+            (errorResponse: any) => {
+              let errorMsg: string;
+              if (errorResponse.error instanceof HttpErrorResponse) {
+                errorMsg = errorResponse.error.message;
+              } else {
+                errorMsg = errorResponse.message
+              }
+              const error = { code: errorResponse.status || errorResponse?.error?.code || errorResponse?.code || 'UNKNOWN', message: errorMsg || 'Something went wrong' }
+              reject(error);
+
+              return throwError(() => {
+                return error;
+              });
+            }
+          ))
+          .subscribe(docsResponse => {
+            const libAssetsInfo: LibAssetsInfo = {
+              services: docsResponse.injectables.map(service => this.docsParserService.parseServiceInfo(service)) || [],
+              components: docsResponse.components.map(component => this.docsParserService.parseComponentInfo(component)) || [],
+              interfaces: docsResponse.interfaces.map(intf => this.docsParserService.parseServiceInfo(intf)) || [],
+              classes: docsResponse.classes.map(cls => this.docsParserService.parseServiceInfo(cls)) || [],
+              directives: docsResponse.directives.map(dirtve => this.docsParserService.parseComponentInfo(dirtve)) || [],
+              interceptors: docsResponse.interceptors.map(interceptor => this.docsParserService.parseServiceInfo(interceptor)) || [],
+              guards: docsResponse.guards.map(guard => this.docsParserService.parseServiceInfo(guard)) || [],
+            };
+
+            resolve(libAssetsInfo);
+          })
+      }
+    })
+  }
+
+  public async getLibsInfo(url: string): Promise<LibsInfo> {
+    if (!url) throw new Error(`Invalid lib's documentation.json url`);
+    console.log(url);
     return new Promise((resolve, reject) => {
       this.httpClient.get<any>(url, { responseType: 'json' })
         .pipe(catchError(
@@ -50,6 +95,7 @@ export class DocsInfoService {
             } else {
               errorMsg = errorResponse.message
             }
+            console.log(errorResponse);
             const error = { code: errorResponse.status || errorResponse?.error?.code || errorResponse?.code || 'UNKNOWN', message: errorMsg || 'Something went wrong' }
             reject(error);
 
@@ -58,19 +104,9 @@ export class DocsInfoService {
             });
           }
         ))
-        .subscribe(docsResponse => {
-          const libAssetsInfo: LibAssetsInfo = {
-            services: docsResponse.injectables.map(service => this.docsParserService.parseServiceInfo(service)) || [],
-            components: docsResponse.components.map(component => this.docsParserService.parseComponentInfo(component)) || [],
-            interfaces: docsResponse.interfaces.map(intf => this.docsParserService.parseServiceInfo(intf)) || [],
-            classes: docsResponse.classes.map(cls => this.docsParserService.parseServiceInfo(cls)) || [],
-            directives: docsResponse.directives.map(dirtve => this.docsParserService.parseComponentInfo(dirtve)) || [],
-            interceptors: docsResponse.interceptors.map(interceptor => this.docsParserService.parseServiceInfo(interceptor)) || [],
-            guards: docsResponse.guards.map(guard => this.docsParserService.parseServiceInfo(guard)) || [],
-          };
-
-          resolve(libAssetsInfo);
-        })
+        .subscribe((libsInfo: LibsInfo) => {
+          resolve(libsInfo);
+        });
     })
   }
 

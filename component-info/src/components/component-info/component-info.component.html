@@ -1,4 +1,3 @@
-
 <article>
     <h1>{{componentInfo?.name}}</h1>
     <p [innerHtml]="componentInfo?.description"></p>
@@ -25,7 +24,9 @@
 
     <section class="usage" *ngIf="activeTab.name === tabs[1].name">
         <!-- TODO: Remove this ng-content once usage component is done. -->
-        <anu-component-usage [componentInfo]="componentInfo"></anu-component-usage>
+        <anu-component-usage [componentInfo]="componentInfo" [componentType]="componentType"
+            [componentData]="componentData">
+        </anu-component-usage>
         <ng-content></ng-content>
     </section>
 

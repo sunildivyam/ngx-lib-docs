@@ -67,7 +67,7 @@ export class ComponentUsageComponent implements OnInit, OnChanges {
     this.inputPropsValues = {};
     this.outputPropResults = [];
 
-    if (!this.componentInfo) return;
+    if (!this.componentInfo || !this.componentType) return;
 
     this.cmpRef = this.cmpContainer.createComponent(this.componentType, {
       index: 0,
