@@ -37,7 +37,7 @@ export class DocsInfoService {
     this.libsInfo$.next({ ...this.libsInfo$.value, [libInfo.name]: libInfo });
   }
 
-  public async getLlibAssetsInfo(url: string): Promise<LibAssetsInfo> {
+  public async getLibAssetsInfo(url: string): Promise<LibAssetsInfo> {
     if (!url) throw new Error(`Invalid lib's documentation.json url`);
 
     return new Promise((resolve, reject) => {
@@ -95,6 +95,17 @@ export class DocsInfoService {
     }
 
     return assetInfo;
+  }
+
+  public getLibInfo(libName: string): LibInfo {
+
+    if (!libName) {
+      throw new Error('Library Name is required.');
+    }
+
+    const libInfo = this.libsInfoValue[libName];
+
+    return libInfo;
   }
 
 }

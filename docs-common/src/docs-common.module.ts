@@ -2,6 +2,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UtilsModule } from '@annuadvent/ngx-core/utils';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -10,6 +11,7 @@ import { UtilsModule } from '@annuadvent/ngx-core/utils';
   imports: [
     CommonModule,
     UtilsModule,
+    HttpClientModule,
   ]
 })
 export class DocsCommonModule { }
