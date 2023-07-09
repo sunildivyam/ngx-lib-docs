@@ -66,14 +66,29 @@ export class DocsInfoService {
             }
           ))
           .subscribe(docsResponse => {
+            const interceptors = [].concat(
+              docsResponse.injectables.filter(inj => inj.file.includes('.interceptor.')) || [],
+              docsResponse.interceptors || []
+            );
+
+            const guards = [].concat(
+              docsResponse.injectables.filter(inj => inj.file.includes('.guard.')) || [],
+              docsResponse.guards || []
+            );
+
+            const services = docsResponse.injectables.filter(
+              inj => !inj.file.includes('.guard.') && !inj.file.includes('.guard.')
+            ) || []
+
+
             const libAssetsInfo: LibAssetsInfo = {
-              services: docsResponse.injectables.map(service => this.docsParserService.parseServiceInfo(service)) || [],
+              services: services.map(service => this.docsParserService.parseServiceInfo(service)) || [],
               components: docsResponse.components.map(component => this.docsParserService.parseComponentInfo(component)) || [],
               interfaces: docsResponse.interfaces.map(intf => this.docsParserService.parseServiceInfo(intf)) || [],
               classes: docsResponse.classes.map(cls => this.docsParserService.parseServiceInfo(cls)) || [],
               directives: docsResponse.directives.map(dirtve => this.docsParserService.parseComponentInfo(dirtve)) || [],
-              interceptors: docsResponse.interceptors.map(interceptor => this.docsParserService.parseServiceInfo(interceptor)) || [],
-              guards: docsResponse.guards.map(guard => this.docsParserService.parseServiceInfo(guard)) || [],
+              interceptors: interceptors.map(interceptor => this.docsParserService.parseServiceInfo(interceptor)) || [],
+              guards: guards.map(guard => this.docsParserService.parseServiceInfo(guard)) || [],
             };
 
             resolve(libAssetsInfo);

@@ -11,4 +11,10 @@
         position: relative;
         min-height: 10rem;
     }
+
+    .component-info {
+        &_article {
+            width: 100%;
+        }
+    }
 }
