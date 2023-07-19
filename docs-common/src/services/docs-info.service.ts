@@ -99,7 +99,7 @@ export class DocsInfoService {
 
   public async getLibsInfo(url: string): Promise<LibsInfo> {
     if (!url) throw new Error(`Invalid lib's documentation.json url`);
-    console.log(url);
+
     return new Promise((resolve, reject) => {
       this.httpClient.get<any>(url, { responseType: 'json' })
         .pipe(catchError(

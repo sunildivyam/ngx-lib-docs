@@ -1,5 +1,6 @@
-<anu-error *ngIf="!serviceInfo" [code]="error?.code || 404" [message]="error?.message || 'Service not found'"></anu-error>
-<article>
+<anu-error *ngIf="!serviceInfo" [code]="error?.code || 404"
+    [message]="error?.message || 'Service not found'"></anu-error>
+<article class="serviceinfo-article">
     <h1>{{serviceInfo?.name}}</h1>
     <p [innerHtml]="serviceInfo?.description"></p>
     <anu-tabs [tabs]="tabs" [activeTab]="activeTab" (changed)="tabChanged($event)"></anu-tabs>
@@ -47,7 +48,8 @@
                                         (changed)="methodParametersChanged($event, fn)"></anu-service-method>
                                     <anu-error *ngIf="methodErrors[fn.name]" [code]="methodErrors[fn.name].code"
                                         [message]="methodErrors[fn.name].message"></anu-error>
-                                    <anu-collapsible *ngIf="methodResponses[fn.name]" [hamBurgerClassNames]="['size-sm']">
+                                    <anu-collapsible *ngIf="methodResponses[fn.name]"
+                                        [hamBurgerClassNames]="['size-sm']">
                                         <anu-collapsible-header>
                                             <a href="javascript:void(0)">Method response</a>
                                         </anu-collapsible-header>

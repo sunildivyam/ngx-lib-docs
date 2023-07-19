@@ -30,11 +30,15 @@ export interface LibAssetsInfo {
     interceptors?: Array<InterceptorInfo>;
 }
 
+export type LibAssetInfo = ComponentInfo | ServiceInfo | DirectiveInfo | InterfaceInfo | GuardInfo | ClassInfo | InterceptorInfo;
+
 export interface LibInfo {
     name: string;
     fullName: string;
     version: string;
-    description: string;
+    description: string;        // from package.json description, can be used for metaInfo
+    descriptionHtml: string;    // from readme.md
+    keywords: Array<string>;    // from package.json keywords, can be used for metaInfo
     homepage: string;
     bugs: string;
     git: string;
