@@ -1,0 +1,26 @@
+:host {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+        margin-top: 1rem;
+    }
+
+    .method-card {
+        margin: 2rem 0;
+        border: 1px solid var(--anu-primary-light);
+    }
+
+    anu-search-box {
+        margin-top: 1rem;
+    }
+
+    anu-card {
+        overflow-x: auto;
+    }
+
+    .serviceinfo-article {
+        width: 100%;
+    }
+}

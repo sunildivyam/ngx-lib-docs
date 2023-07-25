@@ -1,0 +1,47 @@
+<article class="component-info_article">
+    <h1>{{componentInfo?.name}}</h1>
+    <p [innerHtml]="componentInfo?.description"></p>
+    <anu-tabs [tabs]="tabs" [activeTab]="activeTab" (changed)="tabChanged($event)"></anu-tabs>
+
+    <section *ngIf="activeTab.name === tabs[0].name">
+        <ng-container *ngIf="componentInfo?.inputProps && componentInfo?.inputProps.length">
+            <h2>Input Properties</h2>
+            <anu-component-props [props]="componentInfo?.inputProps"></anu-component-props>
+        </ng-container>
+        <ng-container *ngIf="componentInfo?.outputProps && componentInfo?.outputProps.length">
+            <h2>Output Properties / Events</h2>
+            <anu-component-props [props]="componentInfo?.outputProps"></anu-component-props>
+        </ng-container>
+        <ng-container *ngIf="componentInfo?.props && componentInfo?.props.length">
+            <h2>Properties</h2>
+            <anu-component-props [props]="componentInfo?.props"></anu-component-props>
+        </ng-container>
+        <ng-container *ngIf="componentInfo?.methods && componentInfo?.methods.length">
+            <h2>Methods</h2>
+            <anu-component-props [props]="componentInfo?.methods" [type]="propertyTypes.METHOD"></anu-component-props>
+        </ng-container>
+    </section>
+
+    <section class="usage" *ngIf="activeTab.name === tabs[1].name">
+        <!-- TODO: Remove this ng-content once usage component is done. -->
+        <anu-component-usage [componentInfo]="componentInfo" [componentType]="componentType"
+            [componentData]="componentData">
+        </anu-component-usage>
+        <ng-content></ng-content>
+    </section>
+
+    <section *ngIf="activeTab.name === tabs[2].name">
+        <h2>{{componentInfo?.tsUrl}}</h2>
+        <anu-code-block [source]="componentInfo?.tsSource"></anu-code-block>
+    </section>
+
+    <section *ngIf="activeTab.name === tabs[3].name">
+        <h2>{{componentInfo?.templateUrl}}</h2>
+        <anu-code-block [source]="componentInfo?.templateSource"></anu-code-block>
+    </section>
+
+    <section *ngIf="activeTab.name === tabs[4].name">
+        <h2>{{componentInfo?.styleUrl}}</h2>
+        <anu-code-block [source]="componentInfo?.styleSource"></anu-code-block>
+    </section>
+</article>
