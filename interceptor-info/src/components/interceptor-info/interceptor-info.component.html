@@ -1,5 +1,6 @@
-<anu-error *ngIf="!interceptorInfo" [code]="error?.code || 404" [message]="error?.message || 'Interceptor not found'"></anu-error>
-<article>
+<anu-error *ngIf="!interceptorInfo" [code]="error?.code || 404"
+    [message]="error?.message || 'Interceptor not found'"></anu-error>
+<article class="info-article">
     <h1>{{interceptorInfo?.name}}</h1>
     <p [innerHtml]="interceptorInfo?.description"></p>
     <anu-tabs [tabs]="tabs" [activeTab]="activeTab" (changed)="tabChanged($event)"></anu-tabs>

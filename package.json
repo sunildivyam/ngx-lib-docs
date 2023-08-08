@@ -1,6 +1,6 @@
 {
   "name": "@annuadvent/ngx-lib-docs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "description": "Angular @annuadvent/ngx-lib-docs components library",
   "homepage": "https://github.com/sunildivyam/ngx-lib-docs",
@@ -10,8 +10,8 @@
     "url": "https://github.com/sunildivyam/ngx-lib-docs.git"
   },
   "engines": {
-    "node": "18.16.0",
-    "npm": "9.5.1"
+    "node": "18.17.0",
+    "npm": "9.6.7"
   },
   "keywords": [
     "Angular",
@@ -26,8 +26,8 @@
   "peerDependencies": {
     "@angular/common": "^16.1.0",
     "@angular/core": "^16.1.0",
-    "@annuadvent/ngx-common-ui": "^1.0.1",
-    "@annuadvent/ngx-core": "1.0.1"
+    "@annuadvent/ngx-common-ui": "^1.0.2",
+    "@annuadvent/ngx-core": "1.0.2"
   },
   "dependencies": {
     "tslib": "^2.3.0"
